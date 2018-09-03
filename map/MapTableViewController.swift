@@ -11,18 +11,29 @@ import Alamofire
 import WebKit
 import AlamofireImage
 import os.log
-import RealmSwift
+//import RealmSwift
 
 
-class MapTableViewController: UITableViewController {
+class MapTableViewController: UITableViewController, UISearchBarDelegate {
    
     
+    
+    @IBOutlet weak var tableReloader: UITableView!
     
     
     
     @IBOutlet weak var searchBar: UISearchBar!
+    
     var mapData  = [Data]()
     var saver = [Data]()
+    var search : UISearchBar?
+    //Search bar delegates
+ 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        tableView.numberOfRows(inSection: 1)
+        tableView.reloadData()
+        
+    }
     override func viewWillDisappear(_ animated: Bool) {
      /*   let saverString = mapData.description
         let fileManager = FileManager()
@@ -46,6 +57,7 @@ class MapTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         //viewLoading.
        mapData += saver
+        searchBar.text = search?.text
         debugPrint(mapData)
         if(mapData.count == 0){
             loadMapList()}
@@ -69,7 +81,7 @@ class MapTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -82,8 +94,13 @@ class MapTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        /*if(search?.text != nil)
+        {
+            return 1
+        }
+        else{*/
         return 198
+       // }
     }
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -156,7 +173,19 @@ class MapTableViewController: UITableViewController {
                     }
                 }
                 */
-    
+       /* if (search?.text != nil || search?.text != "" && mapData.count != 0)
+        {
+            for i in 0...197 {
+            if (searchBar.text == mapData[i].name || searchBar.text == mapData[i].alpha3Code)
+            {
+                cell.CountryView.text = mapData[i].name
+                cell.FlagView.image = mapData[i].flag
+                cell.GeoCode.text = mapData[i].alpha3Code
+                
+            }
+            }
+        }
+        else {*/
         if (mapData.count != 0){
             //tableView.reloadSections([1,2,3,4,5,6,7], with: UITableViewRowAnimation.fade)
             
@@ -178,14 +207,14 @@ class MapTableViewController: UITableViewController {
         
     }
     
-    
+    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
-
+*/
     /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -232,6 +261,7 @@ class MapTableViewController: UITableViewController {
             }
             
             let selectedMeal = mapData[indexPath.row]
+            mapDetailViewController.search = searchBar
             mapDetailViewController.mapData = mapData
         mapDetailViewController.MapData = selectedMeal
 
@@ -246,7 +276,9 @@ class MapTableViewController: UITableViewController {
         for index in 0...249
         {
             if (searchBar.text == mapData[index].name)
-            {}
+            {
+                
+            }
         }
     }
     private func loadMapList(){

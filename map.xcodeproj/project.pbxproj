@@ -12,6 +12,7 @@
 		4B470E1C206A194800779FE8 /* MapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B470E1B206A194800779FE8 /* MapTableViewController.swift */; };
 		4BBC492520BD24B200724E3A /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC492420BD24B200724E3A /* LoadingViewController.swift */; };
 		4BC8406820A57A50008EEC7D /* Table.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC8406720A57A50008EEC7D /* Table.storyboard */; };
+		4BF466F620EDEE6A005043B2 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF466F520EDEE6A005043B2 /* MapsViewController.swift */; };
 		4BF8F5CF20637C6000F57CC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF8F5CE20637C6000F57CC9 /* AppDelegate.swift */; };
 		4BF8F5D420637C6000F57CC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BF8F5D220637C6000F57CC9 /* Main.storyboard */; };
 		4BF8F5D920637C6000F57CC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BF8F5D720637C6000F57CC9 /* LaunchScreen.storyboard */; };
@@ -39,6 +40,7 @@
 		4B470E1B206A194800779FE8 /* MapTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewController.swift; sourceTree = "<group>"; };
 		4BBC492420BD24B200724E3A /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingViewController.swift; path = /Users/buiver/Desktop/map/map/LoadingViewController.swift; sourceTree = "<absolute>"; };
 		4BC8406720A57A50008EEC7D /* Table.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Table.storyboard; sourceTree = "<group>"; };
+		4BF466F520EDEE6A005043B2 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		4BF8F5CB20637C6000F57CC9 /* map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF8F5CE20637C6000F57CC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BF8F5D320637C6000F57CC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				4BF8F5F020637E2B00F57CC9 /* Data.swift */,
 				4B13363820B410F50052A689 /* DetailedViewController.swift */,
 				4BF8F5D220637C6000F57CC9 /* Main.storyboard */,
+				4BF466F520EDEE6A005043B2 /* MapsViewController.swift */,
 				4BC8406720A57A50008EEC7D /* Table.storyboard */,
 				4B470E1B206A194800779FE8 /* MapTableViewController.swift */,
 				4BF8F5F2206381A600F57CC9 /* MapTableViewCell.swift */,
@@ -150,6 +153,7 @@
 				4BF8F5C820637C6000F57CC9 /* Frameworks */,
 				4BF8F5C920637C6000F57CC9 /* Resources */,
 				BF8EEA7EEC4EF69A5AFE9A04 /* [CP] Embed Pods Frameworks */,
+				37A2E4BFD54AB145D08FD130 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,6 +245,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		37A2E4BFD54AB145D08FD130 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-map/Pods-map-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-map/Pods-map-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4857984D62DF5270BB7CDD29 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -292,6 +316,7 @@
 			files = (
 				4B470E1C206A194800779FE8 /* MapTableViewController.swift in Sources */,
 				4BF8F5F120637E2B00F57CC9 /* Data.swift in Sources */,
+				4BF466F620EDEE6A005043B2 /* MapsViewController.swift in Sources */,
 				4B13363920B410F50052A689 /* DetailedViewController.swift in Sources */,
 				4BF8F5F3206381A600F57CC9 /* MapTableViewCell.swift in Sources */,
 				4BF8F5CF20637C6000F57CC9 /* AppDelegate.swift in Sources */,
