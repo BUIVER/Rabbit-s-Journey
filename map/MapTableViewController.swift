@@ -65,13 +65,7 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-       /* let realm = try! Realm()
-        
-        try! realm.write
-        {
-            realm.add(mapData)
-        }
-       */
+     
    
         print(self.mapData.count)
         

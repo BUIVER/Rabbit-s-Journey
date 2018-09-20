@@ -8,20 +8,32 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-class LoadingViewController: UIViewController {
+class LoadingViewController: UIViewController  {
     
+   
+    @IBOutlet var press: UITapGestureRecognizer!
+    
+   
+    @IBOutlet var viewControl: UIView!
+    @IBOutlet weak var progressBar: UIProgressView!
+    var timer = Timer()
     var mapData = [Data]()
+    var image = UIImage()
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadMapList()
         
-        while(mapData.count != 198)
-        {}
-        
-        
-        // Do any additional setup after loading the view.
     }
-   
+    
+  
+        // Do any additional setup after loading the view.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loadMapList()
+      
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -38,19 +50,20 @@ class LoadingViewController: UIViewController {
     }
     */
 
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
-        let mapTableViewController = segue.destination as? MapTableViewController
-        
-       
-        
-        
-      
-            mapTableViewController?.mapData = mapData
-        
+        let mapDetailViewController = segue.destination as? MapsViewController
+        if(mapDetailViewController != nil)
+        {
+            mapDetailViewController?.mapData = mapData
         }
-        
+        let mapTableViewController = segue.destination as? MapTableViewController
+        if(segue.identifier == "Tabler")
+        {
+        mapTableViewController?.mapData = mapData
+        }
+    }
         
     
     
@@ -95,6 +108,7 @@ class LoadingViewController: UIViewController {
                             let alpha3code = JSON[index].value(forKey: "alpha3Code") as! String
                             let name = JSON[index].value(forKey: "name") as! String
                             let altSpellings = JSON[index].value(forKey: "altSpellings") as! [String]
+                            
                             /*   let area = JSON[index].value(forKey: "area") ?? 0.1
                              let borders = JSON[index].value(forKey: "borders") as! [String]
                              let callingCodes = JSON[index].value(forKey: "callingCodes") as! [String]
@@ -127,34 +141,57 @@ class LoadingViewController: UIViewController {
                                     
                                     // print(type(of :response.result))
                                     let flag = response.result.value
-                                    
-                                    //  print(flag ?? "empty")
-                                    
-                                    if(flag != nil){
-                                        /*   , altSpellings: altSpellings, area: area as! Double, borders:borders, callingCodes: callingCodes, capital:capital, cioc:cioc as! String, currencies:currencies as! [NSDictionary], demonym:demonym, gini:gini as! Double, languages:languages, latlng:latlng as! [Double], nativeName:nativeName, numericCode: numericCode as! String, population:population as! Int, region:region, regionalBlocs:regionalBlocs as! [NSDictionary], subregion:subregion, timezones:timezones, topLevelDomain :topLevelDomain, translations:translation as! [String : String])
-                                         */
-                                        guard let country = Data(name: name, flag: flag!, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings)
+                                    if (flag != nil){
+                                        self.image = flag!
+                                        guard let country = Data(name: name, flag: self.image, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings)
                                             else {fatalError("error of init")}
                                         self.mapData += [country]
                                         print(self.mapData.count)
                                         
-                                        
                                     }
+                                    //  print(flag ?? "empty")
                                     
+                         
+                                    
+                                
                                 }
+                               
                                 
                                 self.mapData.sort(by: {$0.name < $1.name})
                                 
                             }
-                        }
+                              self.progressBar.setProgress(Float(index/249), animated: true)
+                           
+                                /*   , altSpellings: altSpellings, area: area as! Double, borders:borders, callingCodes: callingCodes, capital:capital, cioc:cioc as! String, currencies:currencies as! [NSDictionary], demonym:demonym, gini:gini as! Double, languages:languages, latlng:latlng as! [Double], nativeName:nativeName, numericCode: numericCode as! String, population:population as! Int, region:region, regionalBlocs:regionalBlocs as! [NSDictionary], subregion:subregion, timezones:timezones, topLevelDomain :topLevelDomain, translations:translation as! [String : String])
+                                 */
+                              
+                            
+                            
+                            }
                         
+
                     }
                     
+                    
             }
-            
+           
+            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeVC), userInfo: nil, repeats: true)
         }
         
-        
+       
+      
     }
-    
+   
+    @objc private func changeVC()
+   {
+    if(self.progressBar.progress == 1.0 && mapData.count == 198)
+    {
+        
+        let vc:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Table") as UIViewController
+        
+        self.present(vc, animated: true, completion: nil)
+        performSegue(withIdentifier: "Tabler", sender: Any?.self)
+       
+    }
+    }
 }
