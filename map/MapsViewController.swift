@@ -10,7 +10,9 @@ import UIKit
 import GoogleMaps
 
 class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate  {
-
+   
+    @IBOutlet weak var mapButton: UIBarButtonItem!
+    
     @IBOutlet var zoomOut: UIPinchGestureRecognizer!
   
     var locationManager: CLLocationManager = CLLocationManager()
@@ -38,6 +40,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManage
     var MapData : Data?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = (self as CLLocationManagerDelegate)
         locationManager.requestWhenInUseAuthorization()
@@ -51,6 +54,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManage
        //if(mapView.m)
        // mapView.myLocation?.coordinate.
         self.view.addSubview(mapView)
+       mapButton.isEnabled = false
         // Do any additional setup after loading the view.
     }
 

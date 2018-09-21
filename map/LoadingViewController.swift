@@ -186,10 +186,6 @@ class LoadingViewController: UIViewController  {
    {
     if(self.progressBar.progress == 1.0 && mapData.count == 198)
     {
-        
-        let vc:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Table") as UIViewController
-        
-        self.present(vc, animated: true, completion: nil)
         performSegue(withIdentifier: "Tabler", sender: Any?.self)
        
     }
