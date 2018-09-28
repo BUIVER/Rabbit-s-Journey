@@ -77,12 +77,12 @@ class LoadingViewController: UIViewController  {
                     print(response)
                     //to get status code
                     if let status = response.response?.statusCode {
-                        switch(status){
+                 /*       switch(status){
                         case 201:
                             print("example success")
                         default:
                             print("error with response status: \(status)")
-                        }
+                        }*/
                     }
                     //to get JSON return value
                     if let result = response.result.value {
@@ -98,7 +98,7 @@ class LoadingViewController: UIViewController  {
                             i+=1
                         }
                         print(JSON.count)
-                        print(JSON[0].allKeys)
+                      //  print(JSON[0].allKeys)
                         
                         
                         for index in 0...249
@@ -108,9 +108,9 @@ class LoadingViewController: UIViewController  {
                             let alpha3code = JSON[index].value(forKey: "alpha3Code") as! String
                             let name = JSON[index].value(forKey: "name") as! String
                             let altSpellings = JSON[index].value(forKey: "altSpellings") as! [String]
-                            
-                            /*   let area = JSON[index].value(forKey: "area") ?? 0.1
+                               let area = JSON[index].value(forKey: "area") ?? 0.1
                              let borders = JSON[index].value(forKey: "borders") as! [String]
+                            /*
                              let callingCodes = JSON[index].value(forKey: "callingCodes") as! [String]
                              let capital = JSON[index].value(forKey: "capital") as! String
                              let cioc = JSON[index].value(forKey: "cioc") ?? ""
@@ -132,18 +132,18 @@ class LoadingViewController: UIViewController  {
                             Alamofire.request("http://flags.fmcdn.net/data/flags/w1160/\(alpha2code.lowercased()).png").responseImage { response in
                                 print(response)
                                 if let status = response.response?.statusCode {
-                                    switch(status){
+                                  /* switch(status){
                                     case 201:
                                         print("example success")
                                     default:
                                         print("error with response status: \(status)")
-                                    }
+                                    }*/
                                     
                                     // print(type(of :response.result))
                                     let flag = response.result.value
                                     if (flag != nil){
                                         self.image = flag!
-                                        guard let country = Data(name: name, flag: self.image, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings)
+                                        guard let country = Data(name: name, flag: self.image, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings, area: area as! Double, borders: borders)
                                             else {fatalError("error of init")}
                                         self.mapData += [country]
                                         print(self.mapData.count)

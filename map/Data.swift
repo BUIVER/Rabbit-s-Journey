@@ -14,8 +14,9 @@ class Data: NSObject
     var alpha2Code:String
     var alpha3Code:String
     var altSpellings:[String]
-  /*  var area:Double
+    var area:Double
     var borders:[String]
+    /*
     var callingCodes:[String]
     var capital:String
     var cioc:String
@@ -71,7 +72,7 @@ class Data: NSObject
     }
 }
 */
-    init?(name: String, flag: UIImage?, alpha2Code: String, alpha3Code: String, altSpellings: [String])
+    init?(name: String, flag: UIImage?, alpha2Code: String, alpha3Code: String, altSpellings: [String], area: Double, borders: [String])
     {
         guard !name.isEmpty else {
             return nil
@@ -82,6 +83,8 @@ class Data: NSObject
         self.alpha3Code = alpha3Code
         self.flag = flag
         self.altSpellings = altSpellings
+        self.area = area
+        self.borders = borders
     }
 public struct Currencies
 {

@@ -5,13 +5,13 @@
 //  Created by Ivan Ermak on 27.03.2018.
 //  Copyright © 2018 Ivan Ermak. All rights reserved.
 //
-//\(mapData[indexPath.row].\(alpha2Code).lowercased())
+
 import UIKit
 import Alamofire
 import WebKit
 import AlamofireImage
 import os.log
-//import RealmSwift
+
 
 
 class MapTableViewController: UITableViewController, UISearchBarDelegate {
@@ -29,31 +29,12 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
     var search : UISearchBar?
     //Search bar delegates
  
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+  /*  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         tableView.numberOfRows(inSection: 1)
         tableView.reloadData()
         
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-     /*   let saverString = mapData.description
-        let fileManager = FileManager()
-        let url = URL(string: "/Users/buiver/Desktop/map/filename")
-        fileManager.createFile(atPath: "/Users/buiver/Desktop/map/filename", contents: mapData, attributes: nil)
-        if (fileManager.fileExists(atPath: "/Users/buiver/Desktop/map/filename")){
-            
-                do{try! saverString.write(to: url!, atomically: true, encoding: String.Encoding.iso2022JP)}
-           
-                
-                }
-                
-        
-        
-        
-        //saver = saver.
-      
-     //   fileManager.createFile(atPath: "/Users/user/Desktop/map", contents: saver ?? nil, attributes: nil)
-        */
-    }
+    }*/
+   
     override func viewWillAppear(_ animated: Bool) {
         //viewLoading.
        mapData += saver
@@ -88,7 +69,7 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        /*if(search?.text != nil)
+       /* if(search?.text != nil)
         {
             return 1
         }
@@ -166,8 +147,8 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                         }
                     }
                 }
-                */
-       /* if (search?.text != nil || search?.text != "" && mapData.count != 0)
+         
+        if (search?.text != nil || search?.text != "" && mapData.count != 0)
         {
             for i in 0...197 {
             if (searchBar.text == mapData[i].name || searchBar.text == mapData[i].alpha3Code)
@@ -265,16 +246,7 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
 
  
     //Private methods
-    private func searchBarConfig()
-    {
-        for index in 0...249
-        {
-            if (searchBar.text == mapData[index].name)
-            {
-                
-            }
-        }
-    }
+
     private func loadMapList(){
       
       
@@ -315,8 +287,10 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                         let alpha3code = JSON[index].value(forKey: "alpha3Code") as! String
                         let name = JSON[index].value(forKey: "name") as! String
                         let altSpellings = JSON[index].value(forKey: "altSpellings") as! [String]
-                     /*   let area = JSON[index].value(forKey: "area") ?? 0.1
+                        let area = JSON[index].value(forKey: "area") ?? 0.1
+                        
                         let borders = JSON[index].value(forKey: "borders") as! [String]
+                        /*
                         let callingCodes = JSON[index].value(forKey: "callingCodes") as! [String]
                         let capital = JSON[index].value(forKey: "capital") as! String
                         let cioc = JSON[index].value(forKey: "cioc") ?? ""
@@ -338,13 +312,13 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                             Alamofire.request("http://flags.fmcdn.net/data/flags/w1160/\(alpha2code.lowercased()).png").responseImage { response in
                             print(response)
                             if let status = response.response?.statusCode {
-                                switch(status){
+                               /* switch(status){
                                 case 201:
                                     print("example success")
                                 default:
                                     print("error with response status: \(status)")
                                 }
-                                
+                                */
                                 // print(type(of :response.result))
                                 let flag = response.result.value
                                 
@@ -353,7 +327,7 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                                 if(flag != nil){
                                  /*   , altSpellings: altSpellings, area: area as! Double, borders:borders, callingCodes: callingCodes, capital:capital, cioc:cioc as! String, currencies:currencies as! [NSDictionary], demonym:demonym, gini:gini as! Double, languages:languages, latlng:latlng as! [Double], nativeName:nativeName, numericCode: numericCode as! String, population:population as! Int, region:region, regionalBlocs:regionalBlocs as! [NSDictionary], subregion:subregion, timezones:timezones, topLevelDomain :topLevelDomain, translations:translation as! [String : String])
                                         */
-                                    guard let country = Data(name: name, flag: flag!, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings)
+                                    guard let country = Data(name: name, flag: flag!, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings, area: area as! Double, borders: borders)
                                     else {fatalError("error of init")}
                                     self.mapData += [country]
                                     print(self.mapData.count)
