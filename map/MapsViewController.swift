@@ -8,12 +8,38 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
+import GooglePlacePicker
 
 class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate  {
-   
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var addressLabel: UILabel!
     @IBOutlet weak var mapButton: UIBarButtonItem!
     
+    var placesClient: GMSPlacesClient!
 
+    @IBAction func getCurrentPlace(_ sender: UIButton) {
+        
+        placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            self.nameLabel.text = "No current place"
+            self.addressLabel.text = ""
+            
+            if let placeLikelihoodList = placeLikelihoodList {
+                let place = placeLikelihoodList.likelihoods.first?.place
+                if let place = place {
+                    self.nameLabel.text = place.name
+                    self.addressLabel.text = place.formattedAddress?.components(separatedBy: ", ")
+                        .joined(separator: "\n")
+                }
+            }
+        })
+    }
+        
   
     var locationManager: CLLocationManager = CLLocationManager()
     
@@ -38,6 +64,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManage
         mapView.settings.zoomGestures = true
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
+        placesClient = GMSPlacesClient.shared()
        // debugPrint(mapView.myLocation ?? "empty value")
        //if(mapView.m)
        // mapView.myLocation?.coordinate.

@@ -61,7 +61,7 @@ class DetailedViewController: UIViewController, UITabBarDelegate, UITableViewDel
     var MapData : Data?
     override func viewWillAppear(_ animated: Bool) {
         
-       infoButton.isEnabled = false
+      
         flagImage.image = (MapData?.flag)
         nameLabel.text = MapData?.name
         capital.text = MapData?.capital

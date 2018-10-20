@@ -31,6 +31,10 @@ class LoadingViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        assignbackground()
+        // Do any additional setup after loading the view.
+    
+ 
         loadMapList()
         
       
@@ -69,6 +73,19 @@ class LoadingViewController: UIViewController  {
     
     
 
+    
+    func assignbackground(){
+        let background = UIImage(named: "background")
+        
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIView.ContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
+    }
     private func loadMapList(){
         
         
