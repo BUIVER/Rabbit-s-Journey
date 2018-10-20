@@ -11,9 +11,12 @@ import Firebase
 import FirebaseAuth
 
 class AuthViewController: UIViewController {
-
+    
+    
     private var login : String = ""
     private var password: String = ""
+    var ref: DocumentReference? = nil
+    
     @IBOutlet weak var SignUp: UIButton!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var ResetPassword: UIButton!
@@ -27,6 +30,8 @@ class AuthViewController: UIViewController {
     @IBAction func LogIn(_ sender: Any) {
         Auth.auth().signIn(withEmail: loginField.text ?? "", password: passwordField.text ?? "") { (user, error) in
             debugPrint(user?.user)
+            
+            
             }
         }
     

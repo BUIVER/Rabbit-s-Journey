@@ -11,7 +11,7 @@ import FirebaseAuth
 import Firebase
 
 class SignUpViewController: UIViewController {
-
+    let db = Firestore.firestore()
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordConfirmed: UITextField!
@@ -50,7 +50,8 @@ class SignUpViewController: UIViewController {
         if (checker == 4)
         {
             Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
-                
+                self.db.collection("users").document(user!.user.uid).setData(
+                    ["name" : self.username.text])
             }
             Auth.auth().currentUser?.sendEmailVerification { (error) in
                 // ...
