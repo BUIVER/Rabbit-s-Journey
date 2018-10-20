@@ -7,4 +7,6 @@ target 'map' do
     pod 'AlamofireImage' , '~> 3.3.1'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
+    pod 'Firebase/Core'
+
 end

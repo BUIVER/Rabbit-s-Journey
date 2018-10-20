@@ -69,13 +69,16 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       /* if(search?.text != nil)
+        if(search?.text != nil)
         {
+            
             return 1
         }
-        else{*/
+        else{
         return 198
-       // }
+       
+        }
+        
     }
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -291,8 +294,9 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                         
                         let borders = JSON[index].value(forKey: "borders") as! [String]
                         /*
-                        let callingCodes = JSON[index].value(forKey: "callingCodes") as! [String]
+                        let callingCodes = JSON[index].value(forKey: "callingCodes") as! [String] */
                         let capital = JSON[index].value(forKey: "capital") as! String
+                        /*
                         let cioc = JSON[index].value(forKey: "cioc") ?? ""
                         let currencies = JSON[index].value(forKey: "currencies") ?? ["":""] //as! [NSDictionary]
                         let demonym = JSON[index].value(forKey: "demonym") as! String
@@ -300,8 +304,9 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                         let languages = JSON[index].value(forKey: "languages") as! [NSDictionary]
                         let latlng = JSON[index].value(forKey: "latlng") ?? 0.0
                         let nativeName = JSON[index].value(forKey: "nativeName") as! String
-                        let numericCode = JSON[index].value(forKey: "numericCode") ?? ""
+                        let numericCode = JSON[index].value(forKey: "numericCode") ?? "" */
                         let population = JSON[index].value(forKey: "population") ?? 0
+                        /*
                         let region = JSON[index].value(forKey: "region") as! String
                         let regionalBlocs = JSON[index].value(forKey: "regionalBlocs") ?? ["":""] //as! [NSDictionary]
                         let subregion = JSON[index].value(forKey: "subregion") as! String
@@ -311,7 +316,7 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                         */
                             Alamofire.request("http://flags.fmcdn.net/data/flags/w1160/\(alpha2code.lowercased()).png").responseImage { response in
                             print(response)
-                            if let status = response.response?.statusCode {
+                          //  if let status = response.response?.statusCode {
                                /* switch(status){
                                 case 201:
                                     print("example success")
@@ -327,7 +332,7 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                                 if(flag != nil){
                                  /*   , altSpellings: altSpellings, area: area as! Double, borders:borders, callingCodes: callingCodes, capital:capital, cioc:cioc as! String, currencies:currencies as! [NSDictionary], demonym:demonym, gini:gini as! Double, languages:languages, latlng:latlng as! [Double], nativeName:nativeName, numericCode: numericCode as! String, population:population as! Int, region:region, regionalBlocs:regionalBlocs as! [NSDictionary], subregion:subregion, timezones:timezones, topLevelDomain :topLevelDomain, translations:translation as! [String : String])
                                         */
-                                    guard let country = Data(name: name, flag: flag!, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings, area: area as! Double, borders: borders)
+                                    guard let country = Data(name: name, flag: flag!, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings, area: area as! Double, borders: borders, capital: capital, population: population as! Int)
                                     else {fatalError("error of init")}
                                     self.mapData += [country]
                                     print(self.mapData.count)
@@ -355,4 +360,4 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
 
 
 
-}
+

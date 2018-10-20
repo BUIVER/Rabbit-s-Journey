@@ -16,10 +16,10 @@ class Data: NSObject
     var altSpellings:[String]
     var area:Double
     var borders:[String]
-    /*
-    var callingCodes:[String]
+    
+   // var callingCodes:[String]
     var capital:String
-    var cioc:String
+    /*var cioc:String
     var currencies:[NSDictionary]
     var demonym:String
    
@@ -28,9 +28,9 @@ class Data: NSObject
     var latlng:[Double]
     
     var nativeName:String
-    var numericCode:String
+    var numericCode:String*/
     var population:Int
-    var region:String
+   /* var region:String
     var regionalBlocs:[NSDictionary]
     var subregion:String
     var timezones:[String]
@@ -72,7 +72,7 @@ class Data: NSObject
     }
 }
 */
-    init?(name: String, flag: UIImage?, alpha2Code: String, alpha3Code: String, altSpellings: [String], area: Double, borders: [String])
+    init?(name: String, flag: UIImage?, alpha2Code: String, alpha3Code: String, altSpellings: [String], area: Double, borders: [String], capital: String, population: Int)
     {
         guard !name.isEmpty else {
             return nil
@@ -85,6 +85,8 @@ class Data: NSObject
         self.altSpellings = altSpellings
         self.area = area
         self.borders = borders
+        self.capital = capital
+        self.population = population
     }
 public struct Currencies
 {

@@ -30,6 +30,8 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>we want</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>we want know where you are</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

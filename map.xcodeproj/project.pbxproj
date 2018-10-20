@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B04A92121789DB30041B156 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B04A92021789DB30041B156 /* MenuCollectionViewController.swift */; };
+		4B04A92B217B08670041B156 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B04A92A217B08670041B156 /* GoogleService-Info.plist */; };
+		4B04A92D217B2BAB0041B156 /* CitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B04A92C217B2BAA0041B156 /* CitiesTableViewCell.swift */; };
+		4B04A931217B33F40041B156 /* ClickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B04A930217B33F40041B156 /* ClickerViewController.swift */; };
+		4B04A933217B3A6D0041B156 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B04A932217B3A6D0041B156 /* GameScene.swift */; };
 		4B0505DB208F122100EC9D7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B0505DA208F122000EC9D7D /* Assets.xcassets */; };
 		4B13363920B410F50052A689 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13363820B410F50052A689 /* DetailedViewController.swift */; };
 		4B470E1C206A194800779FE8 /* MapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B470E1B206A194800779FE8 /* MapTableViewController.swift */; };
 		4BBC492520BD24B200724E3A /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBC492420BD24B200724E3A /* LoadingViewController.swift */; };
-		4BC8406820A57A50008EEC7D /* Table.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC8406720A57A50008EEC7D /* Table.storyboard */; };
 		4BE67781215B7EE100C2D4EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BE67780215B7EE000C2D4EA /* Main.storyboard */; };
 		4BE67783215BC7CF00C2D4EA /* bordersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE67782215BC7CF00C2D4EA /* bordersTableViewCell.swift */; };
 		4BF466F620EDEE6A005043B2 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF466F520EDEE6A005043B2 /* MapsViewController.swift */; };
@@ -36,11 +40,15 @@
 
 /* Begin PBXFileReference section */
 		273B75EA96423D4C00761381 /* Pods-map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map.release.xcconfig"; path = "Pods/Target Support Files/Pods-map/Pods-map.release.xcconfig"; sourceTree = "<group>"; };
+		4B04A92021789DB30041B156 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
+		4B04A92A217B08670041B156 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4B04A92C217B2BAA0041B156 /* CitiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTableViewCell.swift; sourceTree = "<group>"; };
+		4B04A930217B33F40041B156 /* ClickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerViewController.swift; sourceTree = "<group>"; };
+		4B04A932217B3A6D0041B156 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		4B0505DA208F122000EC9D7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B13363820B410F50052A689 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		4B470E1B206A194800779FE8 /* MapTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewController.swift; sourceTree = "<group>"; };
 		4BBC492420BD24B200724E3A /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingViewController.swift; path = /Users/buiver/Desktop/map/map/LoadingViewController.swift; sourceTree = "<absolute>"; };
-		4BC8406720A57A50008EEC7D /* Table.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Table.storyboard; sourceTree = "<group>"; };
 		4BE67780215B7EE000C2D4EA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		4BE67782215BC7CF00C2D4EA /* bordersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bordersTableViewCell.swift; sourceTree = "<group>"; };
 		4BF466F520EDEE6A005043B2 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
@@ -102,13 +110,17 @@
 			isa = PBXGroup;
 			children = (
 				4BF8F5CE20637C6000F57CC9 /* AppDelegate.swift */,
+				4B04A930217B33F40041B156 /* ClickerViewController.swift */,
 				4BBC492420BD24B200724E3A /* LoadingViewController.swift */,
 				4BF8F5F020637E2B00F57CC9 /* Data.swift */,
 				4BE67782215BC7CF00C2D4EA /* bordersTableViewCell.swift */,
 				4B13363820B410F50052A689 /* DetailedViewController.swift */,
 				4BE67780215B7EE000C2D4EA /* Main.storyboard */,
+				4B04A932217B3A6D0041B156 /* GameScene.swift */,
+				4B04A92C217B2BAA0041B156 /* CitiesTableViewCell.swift */,
+				4B04A92021789DB30041B156 /* MenuCollectionViewController.swift */,
 				4BF466F520EDEE6A005043B2 /* MapsViewController.swift */,
-				4BC8406720A57A50008EEC7D /* Table.storyboard */,
+				4B04A92A217B08670041B156 /* GoogleService-Info.plist */,
 				4B470E1B206A194800779FE8 /* MapTableViewController.swift */,
 				4BF8F5F2206381A600F57CC9 /* MapTableViewCell.swift */,
 				4B0505DA208F122000EC9D7D /* Assets.xcassets */,
@@ -234,8 +246,8 @@
 			files = (
 				4BF8F5D920637C6000F57CC9 /* LaunchScreen.storyboard in Resources */,
 				4BE67781215B7EE100C2D4EA /* Main.storyboard in Resources */,
+				4B04A92B217B08670041B156 /* GoogleService-Info.plist in Resources */,
 				4BF8F5EF20637C9F00F57CC9 /* Podfile in Resources */,
-				4BC8406820A57A50008EEC7D /* Table.storyboard in Resources */,
 				4B0505DB208F122100EC9D7D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,11 +309,15 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-map/Pods-map-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -315,11 +331,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B04A92121789DB30041B156 /* MenuCollectionViewController.swift in Sources */,
 				4B470E1C206A194800779FE8 /* MapTableViewController.swift in Sources */,
 				4BE67783215BC7CF00C2D4EA /* bordersTableViewCell.swift in Sources */,
 				4BF8F5F120637E2B00F57CC9 /* Data.swift in Sources */,
 				4BF466F620EDEE6A005043B2 /* MapsViewController.swift in Sources */,
+				4B04A931217B33F40041B156 /* ClickerViewController.swift in Sources */,
+				4B04A933217B3A6D0041B156 /* GameScene.swift in Sources */,
 				4B13363920B410F50052A689 /* DetailedViewController.swift in Sources */,
+				4B04A92D217B2BAB0041B156 /* CitiesTableViewCell.swift in Sources */,
 				4BF8F5F3206381A600F57CC9 /* MapTableViewCell.swift in Sources */,
 				4BF8F5CF20637C6000F57CC9 /* AppDelegate.swift in Sources */,
 				4BBC492520BD24B200724E3A /* LoadingViewController.swift in Sources */,
@@ -477,7 +497,7 @@
 				INFOPLIST_FILE = map/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.map.control.version;
+				PRODUCT_BUNDLE_IDENTIFIER = root.rabbitjourney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -494,7 +514,7 @@
 				INFOPLIST_FILE = map/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.map.control.version;
+				PRODUCT_BUNDLE_IDENTIFIER = root.rabbitjourney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
