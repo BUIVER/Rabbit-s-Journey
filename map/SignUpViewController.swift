@@ -15,6 +15,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordConfirmed: UITextField!
+    @IBOutlet weak var completeLabel: UILabel!
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
@@ -50,6 +51,7 @@ class SignUpViewController: UIViewController {
         if (checker == 4)
         {
             Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
+                self.completeLabel.isHidden = false
                 self.db.collection("users").document(user!.user.uid).setData(
                     ["name" : self.username.text])
             }
@@ -62,6 +64,7 @@ class SignUpViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        completeLabel.isHidden = true
         assignbackground()
         // Do any additional setup after loading the view.
     }

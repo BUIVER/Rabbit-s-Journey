@@ -64,8 +64,8 @@ class DetailedViewController: UIViewController, UITabBarDelegate, UITableViewDel
       
         flagImage.image = (MapData?.flag)
         nameLabel.text = MapData?.name
-        capital.text = MapData?.capital
-        population.text = MapData?.population.description
+        capital.text = "Capital city - " + (MapData?.capital)!
+        population.text = "Population - "  + ((MapData?.population.description)!)
         
         var areastring = MapData?.area.description
         areastring = areastring! + " km²"

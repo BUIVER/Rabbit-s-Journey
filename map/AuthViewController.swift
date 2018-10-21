@@ -16,7 +16,7 @@ class AuthViewController: UIViewController {
     private var login : String = ""
     private var password: String = ""
     var ref: DocumentReference? = nil
-    
+    var userdata : AuthDataResult!
     @IBOutlet weak var SignUp: UIButton!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var ResetPassword: UIButton!
@@ -30,6 +30,7 @@ class AuthViewController: UIViewController {
     @IBAction func LogIn(_ sender: Any) {
         Auth.auth().signIn(withEmail: loginField.text ?? "", password: passwordField.text ?? "") { (user, error) in
             debugPrint(user?.user)
+            self.userdata = user!
             
             
             }
@@ -38,7 +39,7 @@ class AuthViewController: UIViewController {
     
     @IBOutlet weak var LogIn: UIButton!
     override func viewDidLoad() {
-        LogIn.isEnabled = false
+        LogIn.isEnabled = true
         super.viewDidLoad()
         assignbackground()
        SignUp.layer.cornerRadius = 10
@@ -62,14 +63,18 @@ class AuthViewController: UIViewController {
         self.view.sendSubviewToBack(imageView)
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        let ProfileViewSegue = segue.destination as? ProfileViewController
+       
         // Get the new view controller using segue.destination.
+        
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
