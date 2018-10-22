@@ -15,6 +15,7 @@ class AuthViewController: UIViewController {
     
     private var login : String = ""
     private var password: String = ""
+    var mapData = [Data]()
     var ref: DocumentReference? = nil
     var userdata : AuthDataResult!
     @IBOutlet weak var SignUp: UIButton!
@@ -70,7 +71,8 @@ class AuthViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         let ProfileViewSegue = segue.destination as? ProfileViewController
-       
+        let MapsSegue = segue.destination as? MapsViewController
+        let ListSegue = segue.destination as? MapTableViewController
         // Get the new view controller using segue.destination.
         
         // Pass the selected object to the new view controller.

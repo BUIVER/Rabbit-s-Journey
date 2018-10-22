@@ -47,8 +47,8 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchBar.searchResultsUpdater = self
+        searchBar.isHidden = true
+      //  searchBar.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Candies"
         navigationItem.searchController = searchController

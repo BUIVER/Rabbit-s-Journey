@@ -106,7 +106,7 @@ class DetailedViewController: UIViewController, UITabBarDelegate, UITableViewDel
        
         let mapsViewController =  segue.destination as? MapsViewController
         
-        
+        let ProfileSegue = segue.destination as? AuthViewController
         
         if ((mapDetailViewController) != nil)
         {
@@ -121,7 +121,12 @@ class DetailedViewController: UIViewController, UITabBarDelegate, UITableViewDel
             mapsViewController?.mapData = mapData
             mapsViewController?.MapData = MapData
         }
-        
+        if ((mapDetailViewController) != nil)
+        {
+            if (search?.text == nil){search?.text = ""}
+            mapDetailViewController?.searchBar = search
+            mapDetailViewController?.mapData = mapData
+        }
         
     }
     
