@@ -53,7 +53,8 @@ class SignUpViewController: UIViewController {
             Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
                 self.completeLabel.isHidden = false
                 self.db.collection("users").document(user!.user.uid).setData(
-                    ["name" : self.username.text])
+                    ["name" : self.username.text]
+                )
             }
             Auth.auth().currentUser?.sendEmailVerification { (error) in
                 // ...
@@ -96,5 +97,8 @@ class SignUpViewController: UIViewController {
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
