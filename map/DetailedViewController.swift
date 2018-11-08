@@ -41,13 +41,13 @@ class DetailedViewController: UIViewController, UITabBarDelegate, UITableViewDel
  
     @IBOutlet weak var infoButton: UIBarButtonItem!
     @IBOutlet weak var exitButton: UIBarButtonItem!
-
+    @IBOutlet weak var capital: UILabel!
+    @IBOutlet weak var population: UILabel!
     @IBOutlet weak var tableCell: UITableViewCell!
     @IBOutlet weak var bordersTable: UITableView!
     @IBOutlet weak var area: UILabel!
     @IBOutlet weak var altSpelling: UILabel!
-    @IBOutlet weak var alpha3Code: UILabel!
-    @IBOutlet weak var alpha2Code: UILabel!
+  
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var flagImage: UIImageView!
     
@@ -61,11 +61,12 @@ class DetailedViewController: UIViewController, UITabBarDelegate, UITableViewDel
     var MapData : Data?
     override func viewWillAppear(_ animated: Bool) {
         
-       infoButton.isEnabled = false
+      
         flagImage.image = (MapData?.flag)
         nameLabel.text = MapData?.name
-        alpha2Code.text = MapData?.alpha2Code
-        alpha3Code.text = MapData?.alpha3Code
+        capital.text = "Capital city - " + (MapData?.capital)!
+        population.text = "Population - "  + ((MapData?.population.description)!)
+        
         var areastring = MapData?.area.description
         areastring = areastring! + " km²"
         area.text = areastring
@@ -105,7 +106,7 @@ class DetailedViewController: UIViewController, UITabBarDelegate, UITableViewDel
        
         let mapsViewController =  segue.destination as? MapsViewController
         
-        
+        let ProfileSegue = segue.destination as? AuthViewController
         
         if ((mapDetailViewController) != nil)
         {
@@ -120,7 +121,12 @@ class DetailedViewController: UIViewController, UITabBarDelegate, UITableViewDel
             mapsViewController?.mapData = mapData
             mapsViewController?.MapData = MapData
         }
-        
+        if ((mapDetailViewController) != nil)
+        {
+            if (search?.text == nil){search?.text = ""}
+            mapDetailViewController?.searchBar = search
+            mapDetailViewController?.mapData = mapData
+        }
         
     }
     

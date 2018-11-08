@@ -8,12 +8,38 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
+import GooglePlacePicker
 
 class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate  {
-   
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var addressLabel: UILabel!
     @IBOutlet weak var mapButton: UIBarButtonItem!
     
-    @IBOutlet var zoomOut: UIPinchGestureRecognizer!
+    var placesClient: GMSPlacesClient!
+
+    @IBAction func getCurrentPlace(_ sender: UIButton) {
+        
+        placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            self.nameLabel.text = "No current place"
+            self.addressLabel.text = ""
+            
+            if let placeLikelihoodList = placeLikelihoodList {
+                let place = placeLikelihoodList.likelihoods.first?.place
+                if let place = place {
+                    self.nameLabel.text = place.name
+                    self.addressLabel.text = place.formattedAddress?.components(separatedBy: ", ")
+                        .joined(separator: "\n")
+                }
+            }
+        })
+    }
+        
   
     var locationManager: CLLocationManager = CLLocationManager()
     
@@ -22,19 +48,7 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManage
     var zoomCoor: Float = 5.0
     
     @IBOutlet weak var gMap: GMSMapView!
-    @IBAction func ZoomingOut(_ sender: UIPinchGestureRecognizer) {
-       // if(zoomOut.state == UIGestureRecognizerState.began)
-       // {
-      //      zoomOut.scale.
-       // }
-       if let view = sender.view
-        {
-        view.transform = view.transform.scaledBy(x: sender.scale, y: sender.scale)
-            sender.scale = 1
-            //zoomCoor
-        }
-    }
-  
+
     var searchBar : UISearchBar?
     var mapData = [Data]()
     var MapData : Data?
@@ -50,10 +64,11 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManage
         mapView.settings.zoomGestures = true
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
-        debugPrint(mapView.myLocation ?? "empty value")
+        placesClient = GMSPlacesClient.shared()
+       // debugPrint(mapView.myLocation ?? "empty value")
        //if(mapView.m)
        // mapView.myLocation?.coordinate.
-        self.view.addSubview(mapView)
+        self.gMap.addSubview(mapView)
        mapButton.isEnabled = false
         // Do any additional setup after loading the view.
     }
@@ -64,15 +79,8 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManage
     }
     
     
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -102,4 +110,32 @@ class MapsViewController: UIViewController, GMSMapViewDelegate, CLLocationManage
         
     }
 
+}
+extension MapsViewController {
+    // 2
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        // 3
+        if status == .authorizedWhenInUse {
+            
+            // 4
+            locationManager.startUpdatingLocation()
+            
+            //5
+            gMap.isMyLocationEnabled = true
+            gMap.settings.myLocationButton = true
+        }
+    }
+    
+    // 6
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            
+            // 7
+            gMap.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+            
+            // 8
+            locationManager.stopUpdatingLocation()
+        }
+        
+    }
 }

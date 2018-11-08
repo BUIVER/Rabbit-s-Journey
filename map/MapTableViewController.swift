@@ -23,10 +23,11 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
     
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
+    var sortedMapData = [Data]()
     var mapData  = [Data]()
     var saver = [Data]()
     var search : UISearchBar?
+    let searchController = UISearchController(searchResultsController: nil)
     //Search bar delegates
  
   /*  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -46,7 +47,12 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        searchBar.isHidden = true
+      //  searchBar.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Candies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
    
         print(self.mapData.count)
         
@@ -69,13 +75,11 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       /* if(search?.text != nil)
-        {
-            return 1
+        if isFiltering() {
+            return sortedMapData.count
         }
-        else{*/
-        return 198
-       // }
+        
+        return mapData.count
     }
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,95 +89,22 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MapTableViewCell  else {
             fatalError("The dequeued cell is not an instance of MepTableViewCell.")
         }
-        /*Alamofire.request("https://restcountries.eu/rest/v2/all", encoding: JSONEncoding.default)
-            .responseJSON { response in
-                print(response)
-                //to get status code
-                if let status = response.response?.statusCode {
-                    switch(status){
-                    case 201:
-                        print("example success")
-                    default:
-                        print("error with response status: \(status)")
-                    }
-                }
-                //to get JSON return value
-                if let result = response.result.value {
-                    // mapData
-                    
-                    print(self.mapData.count)
-                    var i = 0
-                    let JSON = result as! [NSDictionary]//as! [Data]//NSDictionary
-                    
-                    while(i < JSON.count)
-                    {
-                        
-                        i+=1
-                    }
-                    print(JSON.count)
-                    print(JSON[0].allKeys)
-                    
-                    
-                   
-                        let alpha2code = JSON[indexPath.row].value(forKey: "alpha2Code") as! String
-                        let alpha3code = JSON[indexPath.row].value(forKey: "alpha3Code") as! String
-                        let name = JSON[indexPath.row].value(forKey: "name") as! String
-                        Alamofire.request("http://flags.fmcdn.net/data/flags/w1160/\(alpha2code.lowercased()).png").responseImage { response in
-                            print(response)
-                            if let status = response.response?.statusCode {
-                                switch(status){
-                                case 201:
-                                    print("example success")
-                                default:
-                                    print("error with response status: \(status)")
-                                }
-                                
-                                // print(type(of :response.result))
-                                let flag = response.result.value
-                                //  print(flag ?? "empty")
-                                
-                                
-                                
-                                if(flag != nil){
-                                    guard let country = Data(name: name, flag: flag!, alpha2Code: alpha2code, alpha3Code: alpha3code)
-                                        else {fatalError("error of init")}
-                                    self.mapData += [country]
-                                    print(self.mapData.count)
-                                    
-                                    
-                                }
-                                
-                            }
-                        }
-                    }
-                }
-         
-        if (search?.text != nil || search?.text != "" && mapData.count != 0)
+        let mapslot : Data
+        if isFiltering()
         {
-            for i in 0...197 {
-            if (searchBar.text == mapData[i].name || searchBar.text == mapData[i].alpha3Code)
-            {
-                cell.CountryView.text = mapData[i].name
-                cell.FlagView.image = mapData[i].flag
-                cell.GeoCode.text = mapData[i].alpha3Code
-                
-            }
-            }
+            mapslot = sortedMapData[indexPath.row]
+            
         }
-        else {*/
-        if (mapData.count != 0){
-            //tableView.reloadSections([1,2,3,4,5,6,7], with: UITableViewRowAnimation.fade)
-            
-        cell.CountryView.text = mapData[indexPath.row].name
-        cell.FlagView.image = mapData[indexPath.row].flag
-        cell.GeoCode.text = mapData[indexPath.row].alpha3Code
+        else {mapslot = mapData[indexPath.row]}
         
-        if(cell.isHighlighted)
-        {   cell.CountryView.text = mapData[indexPath.row].name
-            cell.FlagView.image = mapData[indexPath.row].flag
-            cell.GeoCode.text = mapData[indexPath.row].alpha3Code
+        if (mapData.count != 0){
             
-            }
+        cell.CountryView.text = mapslot.name
+        cell.FlagView.image = mapslot.flag
+        cell.GeoCode.text = mapslot.alpha3Code
+        
+       
+            
            
         }
         
@@ -246,7 +177,23 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
 
  
     //Private methods
-
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        sortedMapData = mapData.filter({( mapl : Data) -> Bool in
+            return mapl.name.lowercased().contains(searchText.lowercased())
+        })
+        
+        tableView.reloadData()
+    }
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
     private func loadMapList(){
       
       
@@ -291,8 +238,9 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                         
                         let borders = JSON[index].value(forKey: "borders") as! [String]
                         /*
-                        let callingCodes = JSON[index].value(forKey: "callingCodes") as! [String]
+                        let callingCodes = JSON[index].value(forKey: "callingCodes") as! [String] */
                         let capital = JSON[index].value(forKey: "capital") as! String
+                        /*
                         let cioc = JSON[index].value(forKey: "cioc") ?? ""
                         let currencies = JSON[index].value(forKey: "currencies") ?? ["":""] //as! [NSDictionary]
                         let demonym = JSON[index].value(forKey: "demonym") as! String
@@ -300,8 +248,9 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                         let languages = JSON[index].value(forKey: "languages") as! [NSDictionary]
                         let latlng = JSON[index].value(forKey: "latlng") ?? 0.0
                         let nativeName = JSON[index].value(forKey: "nativeName") as! String
-                        let numericCode = JSON[index].value(forKey: "numericCode") ?? ""
+                        let numericCode = JSON[index].value(forKey: "numericCode") ?? "" */
                         let population = JSON[index].value(forKey: "population") ?? 0
+                        /*
                         let region = JSON[index].value(forKey: "region") as! String
                         let regionalBlocs = JSON[index].value(forKey: "regionalBlocs") ?? ["":""] //as! [NSDictionary]
                         let subregion = JSON[index].value(forKey: "subregion") as! String
@@ -311,7 +260,7 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                         */
                             Alamofire.request("http://flags.fmcdn.net/data/flags/w1160/\(alpha2code.lowercased()).png").responseImage { response in
                             print(response)
-                            if let status = response.response?.statusCode {
+                          //  if let status = response.response?.statusCode {
                                /* switch(status){
                                 case 201:
                                     print("example success")
@@ -327,7 +276,7 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
                                 if(flag != nil){
                                  /*   , altSpellings: altSpellings, area: area as! Double, borders:borders, callingCodes: callingCodes, capital:capital, cioc:cioc as! String, currencies:currencies as! [NSDictionary], demonym:demonym, gini:gini as! Double, languages:languages, latlng:latlng as! [Double], nativeName:nativeName, numericCode: numericCode as! String, population:population as! Int, region:region, regionalBlocs:regionalBlocs as! [NSDictionary], subregion:subregion, timezones:timezones, topLevelDomain :topLevelDomain, translations:translation as! [String : String])
                                         */
-                                    guard let country = Data(name: name, flag: flag!, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings, area: area as! Double, borders: borders)
+                                    guard let country = Data(name: name, flag: flag!, alpha2Code: alpha2code, alpha3Code: alpha3code, altSpellings: altSpellings, area: area as! Double, borders: borders, capital: capital, population: population as! Int)
                                     else {fatalError("error of init")}
                                     self.mapData += [country]
                                     print(self.mapData.count)
@@ -348,11 +297,16 @@ class MapTableViewController: UITableViewController, UISearchBarDelegate {
             
         }
         
-        
+   
     }
-    
-    
-
-
-
+extension MapTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+       filterContentForSearchText(searchController.searchBar.text!)
+    }
 }
+    
+
+
+
+
